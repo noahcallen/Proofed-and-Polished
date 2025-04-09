@@ -1,10 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get } from 'firebase/database';
+import { RiBookFill } from 'react-icons/ri';
+import { IoMdAdd } from 'react-icons/io';
+import { IoPersonCircleOutline } from 'react-icons/io5';
 
 export default function NavBar() {
   const { user } = useAuth();
@@ -19,40 +24,43 @@ export default function NavBar() {
         .then((snapshot) => {
           if (snapshot.exists()) {
             setUserRole(snapshot.val().role);
-          } else {
-            console.warn("No role found for user:", user.uid);
           }
         })
-        .catch((error) => console.error("Error fetching user role:", error));
+        .catch((error) => console.error('Error fetching user role:', error));
     }
   }, [user]);
 
-  console.log("User Role:", userRole); // 🔥 Debugging: Check if role is being set
-
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Link passHref href="/" className="navbar-brand">
-          Book Tracker
-        </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Link className="nav-link" href="/">Home</Link>
+    <Navbar className="custom-navbar py-3 mt-4">
+      <Container fluid className="d-flex align-items-center justify-content-between px-4">
+        {/* Centered logo */}
+        <div className="position-absolute top-50 start-50 translate-middle">
+          <img
+            src="/images/defaultImage.png"
+            alt="Logo"
+            style={{ height: '200px' }}
+          />
+        </div>
 
-            {/* Debug: Show user role */}
-            <span className="text-white mx-3">Role: {userRole}</span>
+        {/* Placeholder for left side spacing */}
+        <div style={{ width: '80px' }} />
 
-            {/* Only show "Create Book" link for Admins */}
-            {userRole === "admin" && (
-              <Link className="nav-link" href="/book/new">Create Book</Link>
-            )}
-          </Nav>
+        {/* Right-aligned icon group */}
+        <div className="icon-pill d-flex align-items-center gap-3 px-4 py-2">
+          <Link href="/">
+            <RiBookFill className="nav-icon" />
+          </Link>
 
-          <Button variant="danger" onClick={signOut}>
-            Sign Out
-          </Button>
-        </Navbar.Collapse>
+          {userRole === 'admin' && (
+            <Link href="/book/new">
+              <IoMdAdd className="nav-icon" />
+            </Link>
+          )}
+
+          <div onClick={signOut}>
+            <IoPersonCircleOutline className="nav-icon" />
+          </div>
+        </div>
       </Container>
     </Navbar>
   );

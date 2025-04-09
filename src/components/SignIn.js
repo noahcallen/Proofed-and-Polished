@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { signIn } from '../utils/auth';
@@ -5,17 +7,34 @@ import { signIn } from '../utils/auth';
 function Signin() {
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="d-flex flex-column justify-content-center align-items-center"
       style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
+        height: '100vh',
+        backgroundColor: '#fff',
+        textAlign: 'center',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <img
+        src="/images/defaultImage.png"
+        alt="Logo"
+        style={{
+          height: '280px',
+          marginBottom: '20px',
+        }}
+      />
+
+      <Button
+        type="button"
+        size="lg"
+        onClick={signIn}
+        className="rounded-pill"
+        style={{
+          backgroundColor: '#000',
+          border: 'none',
+          fontSize: '1.5rem',
+          padding: '14px 40px',
+        }}
+      >
         Sign In
       </Button>
     </div>

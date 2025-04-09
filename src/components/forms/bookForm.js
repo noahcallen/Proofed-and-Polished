@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { Button, Row, Col, Container } from 'react-bootstrap';
 import { useAuth } from '@/utils/context/authContext';
 import { createBook, updateBook } from '@/api/bookData';
 import { getDatabase, ref, get } from 'firebase/database';
@@ -53,7 +53,6 @@ function BookForm({ obj = initialState }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     const updatedInput = { ...formInput, [name]: value };
 
     const wordCount = Number(updatedInput.word_count);
@@ -97,84 +96,140 @@ function BookForm({ obj = initialState }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="text-black">
-      <h2 className="text-white mt-5">{formInput.firebaseKey ? 'Update' : 'Create'} Book</h2>
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: '100vh' }}
+    >
+      <div
+        style={{
+          backgroundColor: '#D9D9D9',
+          borderRadius: '30px',
+          padding: '50px',
+          width: '95%',
+          maxWidth: '1100px',
+        }}
+      >
+        <h2 className="text-black mb-4 text-center">
+          {formInput.firebaseKey ? 'Update' : 'Create'} Book
+        </h2>
+        <Form onSubmit={handleSubmit}>
+          <Row xs={1} md={2} className="g-4">
+            <Col>
+              <FloatingLabel controlId="title" label="Book Title">
+                <Form.Control type="text" name="title" value={formInput.title} onChange={handleChange} required />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="title" label="Book Title" className="mb-3">
-        <Form.Control type="text" name="title" value={formInput.title} onChange={handleChange} required />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="author" label="Author">
+                <Form.Control type="text" name="author" value={formInput.author} onChange={handleChange} required />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="author" label="Author" className="mb-3">
-        <Form.Control type="text" name="author" value={formInput.author} onChange={handleChange} required />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="genre" label="Genre">
+                <Form.Control type="text" name="genre" value={formInput.genre} onChange={handleChange} required />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="genre" label="Genre" className="mb-3">
-        <Form.Control type="text" name="genre" value={formInput.genre} onChange={handleChange} required />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="sub_genre" label="Sub Genre">
+                <Form.Control type="text" name="sub_genre" value={formInput.sub_genre} onChange={handleChange} />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="sub_genre" label="Sub Genre" className="mb-3">
-        <Form.Control type="text" name="sub_genre" value={formInput.sub_genre} onChange={handleChange} />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="pen_name" label="Pen Name">
+                <Form.Control type="text" name="pen_name" value={formInput.pen_name} onChange={handleChange} />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="pen_name" label="Pen Name" className="mb-3">
-        <Form.Control type="text" name="pen_name" value={formInput.pen_name} onChange={handleChange} />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="date" label="Date">
+                <Form.Control type="date" name="date" value={formInput.date} onChange={handleChange} required />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="date" label="Date" className="mb-3">
-        <Form.Control type="date" name="date" value={formInput.date} onChange={handleChange} required />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="amazonLink" label="Amazon Link">
+                <Form.Control type="url" name="amazonLink" value={formInput.amazonLink} onChange={handleChange} />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="amazonLink" label="Amazon Link" className="mb-3">
-        <Form.Control type="url" name="amazonLink" value={formInput.amazonLink} onChange={handleChange} />
-      </FloatingLabel>
+            <Col>
+              <FloatingLabel controlId="image" label="Image URL">
+                <Form.Control type="text" name="image" value={formInput.image} onChange={handleChange} />
+              </FloatingLabel>
+            </Col>
 
-      <FloatingLabel controlId="image" label="Image URL" className="mb-3">
-        <Form.Control type="text" name="image" value={formInput.image} onChange={handleChange} />
-      </FloatingLabel>
+            {userRole === 'admin' && (
+              <>
+                <Col>
+                  <FloatingLabel controlId="word_count" label="Word Count">
+                    <Form.Control type="number" name="word_count" value={formInput.word_count} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
 
-      {userRole === 'admin' && (
-        <>
-          <FloatingLabel controlId="word_count" label="Word Count" className="mb-3">
-            <Form.Control type="number" name="word_count" value={formInput.word_count} onChange={handleChange} />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="hours" label="Hours Worked">
+                    <Form.Control type="number" name="hours" value={formInput.hours} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="hours" label="Hours Worked" className="mb-3">
-            <Form.Control type="number" name="hours" value={formInput.hours} onChange={handleChange} />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="hourly_rate" label="Hourly Rate ($)">
+                    <Form.Control type="number" name="hourly_rate" value={formInput.hourly_rate} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="hourly_rate" label="Hourly Rate ($)" className="mb-3">
-            <Form.Control type="number" name="hourly_rate" value={formInput.hourly_rate} onChange={handleChange} />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="invoiced_amount" label="Invoiced Amount ($)">
+                    <Form.Control type="number" name="invoiced_amount" value={formInput.invoiced_amount} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="invoiced_amount" label="Invoiced Amount ($)" className="mb-3">
-            <Form.Control type="number" name="invoiced_amount" value={formInput.invoiced_amount} onChange={handleChange} />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="wph" label="Words Per Hour (Auto)">
+                    <Form.Control type="text" name="wph" value={formInput.wph} readOnly />
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="wph" label="Words Per Hour (Auto)" className="mb-3">
-            <Form.Control type="text" name="wph" value={formInput.wph} readOnly />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="status" label="Service">
+                    <Form.Select name="status" value={formInput.status} onChange={handleChange}>
+                      <option value="">Select Service</option>
+                      <option value="Proofed">Proofed</option>
+                      <option value="Copyedit">Copyedit</option>
+                      <option value="Line Edit">Line Edit</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="status" label="Service" className="mb-3">
-            <Form.Select name="status" value={formInput.status} onChange={handleChange}>
-              <option value="">Select Service</option>
-              <option value="Proofed">Proofed</option>
-              <option value="Copyedit">Copyedit</option>
-              <option value="Line Edit">Line Edit</option>
-            </Form.Select>
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="posted_to_facebook" label="Posted to Facebook">
+                    <Form.Control type="date" name="posted_to_facebook" value={formInput.posted_to_facebook || ''} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
 
-          <FloatingLabel controlId="posted_to_facebook" label="Posted to Facebook" className="mb-3">
-            <Form.Control type="date" name="posted_to_facebook" value={formInput.posted_to_facebook || ''} onChange={handleChange} />
-          </FloatingLabel>
+                <Col>
+                  <FloatingLabel controlId="posted_to_website" label="Posted to Website">
+                    <Form.Control type="date" name="posted_to_website" value={formInput.posted_to_website || ''} onChange={handleChange} />
+                  </FloatingLabel>
+                </Col>
+              </>
+            )}
+          </Row>
 
-          <FloatingLabel controlId="posted_to_website" label="Posted to Website" className="mb-3">
-            <Form.Control type="date" name="posted_to_website" value={formInput.posted_to_website || ''} onChange={handleChange} />
-          </FloatingLabel>
-        </>
-      )}
-
-      {userRole === 'admin' && <Button type="submit">{formInput.firebaseKey ? 'Update' : 'Create'} Book</Button>}
-    </Form>
+          {userRole === 'admin' && (
+            <div className="text-center mt-4">
+              <Button type="submit" variant="dark" size="lg" style={{ borderRadius: '30px', padding: '10px 40px' }}>
+                {formInput.firebaseKey ? 'Update' : 'Create'} Book
+              </Button>
+            </div>
+          )}
+        </Form>
+      </div>
+    </Container>
   );
 }
 
