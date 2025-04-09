@@ -1,7 +1,7 @@
 'use client';
 
 import { clientCredentials } from '../utils/client';
-import { getDatabase, ref, set, push, remove, update } from 'firebase/database';
+import { getDatabase, ref, set, push, remove } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 
 const endpoint = clientCredentials.databaseURL;

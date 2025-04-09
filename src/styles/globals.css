@@ -1,4 +1,54 @@
 body {
-  background: black;
+  background: rgb(255, 255, 255);
   color: white;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.custom-navbar {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  position: relative;
+  z-index: 1000;
+}
+
+.icon-pill {
+  background-color: #D9D9D9;
+  border-radius: 50px;
+  transition: background-color 0.2s ease-in-out;
+  padding: 0.5rem 1rem;
+}
+
+.nav-icon {
+  color: black;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-icon:hover {
+  transform: scale(1.2);
+  color: #333;
+}
+
+.page-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.page-container:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }

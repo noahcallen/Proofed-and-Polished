@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { Button, Spinner, Form } from 'react-bootstrap';
-import { signOut } from '@/utils/auth';
 import { useAuth } from '@/utils/context/authContext';
 import { getBooks } from '@/api/bookData';
 import { useRouter } from 'next/navigation';
+import { TbDeviceDesktopCheck, TbDeviceMobileCheck } from 'react-icons/tb';
+import { IoIosInformationCircleOutline } from 'react-icons/io';
 
 function Home() {
   const { user } = useAuth();
@@ -29,8 +30,7 @@ function Home() {
     } else {
       const lowerSearch = searchTerm.toLowerCase();
       const filtered = books.filter((book) =>
-        book.title?.toLowerCase().includes(lowerSearch) ||
-        book.description?.toLowerCase().includes(lowerSearch)
+        book.title?.toLowerCase().includes(lowerSearch)
       );
       setFilteredBooks(filtered);
     }
@@ -39,51 +39,86 @@ function Home() {
   return (
     <div
       className="text-center d-flex flex-column align-items-center"
-      style={{ minHeight: '90vh', padding: '30px' }}
+      style={{ minHeight: '100vh', padding: '40px' }}
     >
-      <div className="w-100" style={{ maxWidth: '800px' }}>
-        <h2 className="text-white text-start mb-3">All Books</h2>
+      <div
+        className="w-100"
+        style={{
+          maxWidth: '95%',
+          backgroundColor: '#D9D9D9',
+          borderRadius: '30px',
+          padding: '40px',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+        }}
+      >
 
-        <Form.Control
-          type="text"
-          placeholder="Search books..."
-          className="mb-3"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <Form.Control
+            type="text"
+            placeholder="Search books..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: '300px',
+              borderRadius: '30px',
+              padding: '10px 15px',
+            }}
+          />
+          <div className="text-black fw-bold fs-5">Total: {filteredBooks.length}</div>
+        </div>
 
         {loading ? (
-          <Spinner animation="border" variant="light" />
+          <Spinner animation="border" variant="dark" />
         ) : filteredBooks.length === 0 ? (
-          <p className="text-white">No books found.</p>
+          <p className="text-black">No books found.</p>
         ) : (
-          <ul className="list-group">
-            {filteredBooks.map((book) => (
-              <li
-                key={book.firebaseKey}
-                className="list-group-item d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <strong>{book.title}</strong> — {book.description}
-                  {book.date && (
-                    <small className="text-muted ms-2">({book.date})</small>
-                  )}
-                </div>
+          <div style={{ maxHeight: '800px', overflowY: 'auto' }}>
+            <ul className="list-group">
+              {filteredBooks.map((book) => (
+                <li
+                  key={book.firebaseKey}
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <strong>{book.title}</strong>
+                    {book.date && (
+                      <small className="text-muted ms-2">({book.date})</small>
+                    )}
+                  </div>
 
-                <div className="d-flex align-items-center ms-auto gap-2">
-                  {book.posted_to_facebook && <span>📱</span>}
-                  {book.posted_to_website && <span>💻</span>}
-                  <Button
-                    variant="outline-secondary"
+                  <div className="d-flex align-items-center ms-auto gap-2">
+                    {book.posted_to_facebook && (
+                      <TbDeviceMobileCheck color="#007bff" size={20} />
+                    )}
+                    {book.posted_to_website && (
+                      <TbDeviceDesktopCheck color="#28a745" size={20} />
+                    )}
+                    <Button
+                    variant="light"
                     size="sm"
                     onClick={() => router.push(`/book/${book.firebaseKey}`)}
+                    style={{
+                      borderRadius: '50px',
+                      backgroundColor: '#D9D9D9',
+                      color: 'black',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '80px',           // Wider for pill shape
+                      height: '36px',
+                      border: 'none',
+                      padding: '0 12px',
+                      fontWeight: '500',
+                    }}
                   >
-                    View
+                    <IoIosInformationCircleOutline size={22} />
                   </Button>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  </div>
+
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>
