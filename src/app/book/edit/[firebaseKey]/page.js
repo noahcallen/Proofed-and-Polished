@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { getSingleBook } from '@/api/bookData';
-import BookForm from '@/components/forms/BookForm';
 import PropTypes from 'prop-types';
+import BookForm from '../../../../components/forms/bookForm';
 
 export default function EditBook({ params }) {
   const [editItem, setEditItem] = useState(null);
