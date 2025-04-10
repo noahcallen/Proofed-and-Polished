@@ -64,7 +64,7 @@
 ## 🌐 Live Deployment & 🎥 Video Demo
 [![Netlify Status](https://api.netlify.com/api/v1/badges/858ea93d-1c95-45d6-880a-a79e3e1e57ba/deploy-status)](https://app.netlify.com/sites/proofedandpolished/deploys)
 - 🔗 **Live Site**: [Visit Proofed and Polished](proofedandpolished.netlify.app)
-- 🎬 **Loom Demo**: [Watch Walkthrough on Loom]([https://www.loom.com/share/your-loom-video-link](https://www.loom.com/share/5eb78a28d2dd4067a75f52fd460aa949?sid=5f59e3f9-d2eb-40ee-9336-ee93fb84ee8c))
+- 🎬 **Loom Demo**: [Watch Walkthrough on Loom](https://www.loom.com/share/5eb78a28d2dd4067a75f52fd460aa949?sid=957db5f3-0372-43fb-9ddd-377e48c32efe)
 
 Explore the platform live or check out the demo to see how the roles, book tracking, and editing tools all come together in real-time.
 
