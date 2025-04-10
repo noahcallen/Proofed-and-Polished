@@ -36,14 +36,7 @@ export default function NavBar() {
         fluid
         className="d-flex flex-lg-row flex-column align-items-center justify-content-between px-4"
       >
-        {/* Logo in center */}
-        <div className="mb-3 mb-lg-0 position-relative" style={{ zIndex: 10 }}>
-          <img
-            src="/images/defaultImage.png"
-            alt="Logo"
-            style={{ height: '120px' }}
-          />
-        </div>
+       
 
         {/* Placeholder for left side spacing */}
         <div style={{ width: '80px' }} />
