@@ -59,7 +59,7 @@ function Home() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
-              width: '300px',
+              maxWidth: '300px',
               borderRadius: '30px',
               padding: '10px 15px',
             }}
@@ -73,7 +73,7 @@ function Home() {
           <p className="text-black">No books found.</p>
         ) : (
           <div style={{ maxHeight: '800px', overflowY: 'auto' }}>
-            <ul className="list-group">
+            <ul className="list-group" style={{ minWidth: '400px', overflowY: 'auto' }}>
               {filteredBooks.map((book) => (
                 <li
                   key={book.firebaseKey}

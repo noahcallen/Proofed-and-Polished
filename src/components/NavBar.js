@@ -31,14 +31,17 @@ export default function NavBar() {
   }, [user]);
 
   return (
-    <Navbar className="custom-navbar py-3 mt-4">
-      <Container fluid className="d-flex align-items-center justify-content-between px-4">
-        {/* Centered logo */}
-        <div className="position-absolute top-50 start-50 translate-middle">
+    <Navbar className="custom-navbar py-3 mt-4" style={{ maxWidth:'300px' }}>
+      <Container
+        fluid
+        className="d-flex flex-lg-row flex-column align-items-center justify-content-between px-4"
+      >
+        {/* Logo in center */}
+        <div className="mb-3 mb-lg-0 position-relative" style={{ zIndex: 10 }}>
           <img
             src="/images/defaultImage.png"
             alt="Logo"
-            style={{ height: '200px' }}
+            style={{ height: '120px' }}
           />
         </div>
 
@@ -46,7 +49,7 @@ export default function NavBar() {
         <div style={{ width: '80px' }} />
 
         {/* Right-aligned icon group */}
-        <div className="icon-pill d-flex align-items-center gap-3 px-4 py-2">
+        <div className="icon-pill d-flex gap-3 px-4 py-2">
           <Link href="/">
             <RiBookFill className="nav-icon" />
           </Link>
