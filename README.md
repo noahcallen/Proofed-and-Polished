@@ -1,61 +1,103 @@
-# NextJS with Firebase Auth App Router Template
+# 📚 Proofed and Polished
 
-[See Live Demo of this Template](https://drt-next-js-template-app-router.netlify.app/)
+**Proofed and Polished** is a role-based book tracking platform tailored for copyeditors and administrative users. It allows secure tracking of editing projects, including financial and production metrics such as hours worked, word count, hourly rate, and invoiced amounts. The app was designed with clarity, usability, and data transparency in mind.
 
-## Topics
-- [Get Started](#get-started)
-- [Starting the Project](#starting-the-project)
-- [Deploying on Netlify](#deploying-on-netlify)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+---
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+## 🛠️ Tech Stack
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+- **Next.js 14** (App Router)
+- **React Bootstrap**
+- **Tailwind CSS** (via `globals.css`)
+- **Firebase Realtime Database** (for user and book data)
+- **Firebase Auth**
+- **Netlify** (deployment)
+- **React Icons**
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. Run `npx eslint . --ext .js,.jsx`
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+---
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://github.com/user-attachments/assets/deae25f0-01d5-44b4-be60-7297b0f6f0ef">
+## 🧠 Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 🔐 Authentication & Roles
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+- Firebase Authentication controls access.
+- Admin users have full CRUD access.
+- VA users have limited edit permissions (only update image, Amazon link, and post dates).
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
+### 📖 Book Management
 
-### Deploying on Netlify
-Netlify will automatically detect your project and prepopulate the settings, but should something go wrong and it does not, here are the commands:
+- Admin users can:
+  - Create, edit, and delete books.
+  - Track editing services (Proof, Copyedit, Line Edit).
+  - Input financials like hours, hourly rate, invoiced amount.
+  - Auto-calculate WPH and rate per word.
+  - Post completed books to Facebook and Website.
 
-- Build Command: `npm run build`
-- Publish directory: `.next`
+- VA users can:
+  - View limited book data.
+  - Edit post dates and Amazon link.
+  - Cannot modify sensitive data like finances.
 
-#### Additional Steps to Take on Netlify
-- Add Environmental Variables
-    - Any Enviromental variables you are using in your `.env` file should be added to Netlify. 
-        - Go to Site settings > Build & deploy > Environment > Environment variables and the keys and values there if you did not add them when you were deploying your site
+### 💾 Data Fields Tracked
 
-- Update Firebase URL Settings
-    - In Firebase under Authentication select sign in methods, scroll to Authorized domains. Add your Netlify URL.
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+- Title, Author, Genre, Sub-Genre
+- Date Completed
+- Word Count
+- Hours Worked
+- Hourly Rate
+- Invoiced Amount
+- WPH (Words per Hour)
+- Rate per Word
+- Amazon Link
+- Posted to Facebook
+- Posted to Website
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🖼️ UI/UX
+
+- Responsive design using a combination of Tailwind and Bootstrap.
+- Icons are grouped in a stylized pill container on the navbar.
+- All data views and forms are styled within a soft gray background card.
+- Book list and form views include scrollable areas and consistent spacing for readability.
+
+---
+
+## 🌐 Live Deployment & 🎥 Video Demo
+[![Netlify Status](https://api.netlify.com/api/v1/badges/858ea93d-1c95-45d6-880a-a79e3e1e57ba/deploy-status)](https://app.netlify.com/sites/proofedandpolished/deploys)
+- 🔗 **Live Site**: [Visit Proofed and Polished](proofedandpolished.netlify.app)
+- 🎬 **Loom Demo**: [Watch Walkthrough on Loom]([https://www.loom.com/share/your-loom-video-link](https://www.loom.com/share/5eb78a28d2dd4067a75f52fd460aa949?sid=5f59e3f9-d2eb-40ee-9336-ee93fb84ee8c))
+
+Explore the platform live or check out the demo to see how the roles, book tracking, and editing tools all come together in real-time.
+
+---
+
+## 🚀 Getting Started
+
+### ✅ Prerequisites
+
+- Node.js
+- Firebase project with Realtime DB + Auth enabled
+- `.env.local` file with all required `NEXT_PUBLIC_FIREBASE_*` keys
+
+### 🧪 Install & Run
+
+```bash
+npm install
+npm run dev
+```
+
+### 🔒 Environment Variables Example
+
+```bash
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=your_db_url
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_bucket
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
+
+---
+
+### 💡 Inspiration
+
+Built as a freelance capstone project to digitize and streamline the manual tracking process for editing work. Designed to feel familiar to users accustomed to spreadsheets while providing the scalability of a web app.
